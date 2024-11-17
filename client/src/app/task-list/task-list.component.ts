@@ -13,14 +13,14 @@ import { CommonModule } from '@angular/common';
 export class TaskListComponent {
   tasks: any[] = [];
 
-  constructor(private taskServuce: TaskService) {}
+  constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {
     this.getTasks();
   }
 
   getTasks(): void {
-    this.taskServuce.getAllTasks().subscribe((data) => {
+    this.taskService.getAllTasks().subscribe((data) => {
       this.tasks = data;
     });
   }
