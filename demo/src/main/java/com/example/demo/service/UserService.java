@@ -48,8 +48,9 @@ public class UserService {
         if (optionalUser.isPresent()) {
             throw new AppException("Login already exists", HttpStatus.BAD_REQUEST);
         }
-
+        System.out.println("before creating user : " + userDto);
         User user = userMapper.signUpToUser(userDto);
+        System.out.println("after creating user : " + user.getFirstName());
         user.setPassword(passwordEncoder.encode(CharBuffer.wrap(userDto.password())));
 
         User savedUser = userRepository.save(user);

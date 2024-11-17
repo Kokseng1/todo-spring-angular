@@ -23,6 +23,10 @@ public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
             HttpServletRequest request,
             HttpServletResponse response,
             AuthenticationException authException) throws IOException, ServletException {
+        System.out.println("Request URI: " + request.getRequestURI());
+        System.out.println("Request Method: " + request.getMethod());
+        System.out.println("AuthenticationException: " + authException.getMessage());
+
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         OBJECT_MAPPER.writeValue(response.getOutputStream(), new ErrorDto("Unauthorized path"));

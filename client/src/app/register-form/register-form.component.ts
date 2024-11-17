@@ -20,10 +20,10 @@ export class RegisterFormComponent {
 
   login() {
     const registerPayload = {
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      login: ['', [Validators.required, Validators.email]], // Assuming login is an email
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      firstName: 'john',
+      lastName: 'doeFromFrontend',
+      login: 'login2',
+      password: 'password',
     };
 
     this.http
