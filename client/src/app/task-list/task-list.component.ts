@@ -9,13 +9,20 @@ import { CreateTaskButtonComponent } from '../create-task-button/create-task-but
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [HttpClientModule, CommonModule, LogoutButtonComponent, FormsModule, CreateTaskButtonComponent],
+  imports: [
+    HttpClientModule,
+    CommonModule,
+    LogoutButtonComponent,
+    FormsModule,
+    CreateTaskButtonComponent,
+  ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.css',
 })
 export class TaskListComponent {
   tasks: any[] = [];
   isLoading: boolean = true;
+  confirmDelete: Number = -1;
 
   constructor(private taskService: TaskService) {}
 
@@ -25,7 +32,7 @@ export class TaskListComponent {
 
   getTasks(): void {
     this.taskService.getAllTasks().subscribe((data) => {
-      this.tasks = data;
+      this.tasks = [...data];
       this.isLoading = false;
     });
   }
@@ -33,10 +40,27 @@ export class TaskListComponent {
   toggleTaskStatus(task: any): void {
     this.taskService
       .updateTaskStatus(task.id, task.status)
-      .subscribe((data) => {});
+      .subscribe((data) => {
+        this.getTasks();
+      });
   }
 
   delete(task: any): void {
-    this.taskService.deleteTask(task.id).subscribe((data) => {});
+    if (this.confirmDelete == task.id) {
+      this.taskService.deleteTask(task.id).subscribe((data) => {
+        this.getTasks();
+      });
+      this.confirmDelete = -1;
+    } else {
+      this.confirmDelete = task.id;
+    }
+  }
+
+  cancelDelete(): void {
+    this.confirmDelete = -1;
+  }
+
+  updateTasksFromChild(data: any[]): void {
+    this.tasks = data;
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TaskService } from '../task.service';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './create-task-button.component.css',
 })
 export class CreateTaskButtonComponent {
+  @Output() sendTasksToParent: EventEmitter<any[]> = new EventEmitter();
+
   showPanel: boolean = false;
   newTaskName: string = '';
 
@@ -22,12 +24,13 @@ export class CreateTaskButtonComponent {
 
   createTask(): void {
     if (this.newTaskName.trim()) {
-      // Call the service to save the new task
       this.taskService.createTask(this.newTaskName).subscribe({
         next: (response) => {
-          console.log('Task created:', response);
-          this.newTaskName = ''; // Clear the input
-          this.showPanel = false; // Close the panel
+          this.newTaskName = '';
+          this.showPanel = false;
+          this.taskService.getAllTasks().subscribe((data) => {
+            this.sendTasksToParent.emit(data);
+          });
         },
         error: (err) => console.error('Error creating task:', err),
       });

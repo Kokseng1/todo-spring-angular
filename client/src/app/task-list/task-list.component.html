@@ -13,9 +13,19 @@
         [(ngModel)]="task.status"
         (change)="toggleTaskStatus(task)"
       />
-      <button (click)="delete(task)">delete</button>
+      <button *ngIf="confirmDelete == task.id" (click)="delete(task)">
+        confirm delete
+      </button>
+      <button *ngIf="confirmDelete == task.id" (click)="cancelDelete()">
+        cancel
+      </button>
+      <button *ngIf="confirmDelete != task.id" (click)="delete(task)">
+        delete
+      </button>
     </li>
   </ul>
 </div>
 
-<app-create-task-button></app-create-task-button>
+<app-create-task-button
+  (sendTasksToParent)="updateTasksFromChild($event)"
+></app-create-task-button>
