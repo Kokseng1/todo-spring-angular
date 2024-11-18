@@ -21,4 +21,8 @@ export class TaskService {
   deleteTask(id: any) {
     return this.http.delete(`${this.apiURL}/${id}`);
   }
+
+  createTask(name: string) {
+    return this.http.post(`${this.apiURL}/add`, { name: name, status: false });
+  }
 }

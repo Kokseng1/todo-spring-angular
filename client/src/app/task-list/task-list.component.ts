@@ -4,11 +4,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { LogoutButtonComponent } from '../logout-button/logout-button.component';
 import { FormsModule } from '@angular/forms';
+import { CreateTaskButtonComponent } from '../create-task-button/create-task-button.component';
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [HttpClientModule, CommonModule, LogoutButtonComponent, FormsModule],
+  imports: [HttpClientModule, CommonModule, LogoutButtonComponent, FormsModule, CreateTaskButtonComponent],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.css',
 })
