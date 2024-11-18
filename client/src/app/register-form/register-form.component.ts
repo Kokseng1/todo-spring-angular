@@ -20,10 +20,10 @@ export class RegisterFormComponent {
 
   login() {
     const registerPayload = {
-      firstName: 'john',
-      lastName: 'doeFromFrontend',
-      login: 'login2',
-      password: 'password',
+      firstName: this.firstname,
+      lastName: this.lastname,
+      login: this.username,
+      password: this.password,
     };
 
     this.http
@@ -32,9 +32,9 @@ export class RegisterFormComponent {
       })
       .subscribe({
         next: (response) => {
-          if (response.status === 200) {
+          if (response.status === 201) {
             console.log('Register successful');
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/login']);
           }
         },
         error: (error) => {
