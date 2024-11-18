@@ -11,11 +11,14 @@ export class TaskService {
   constructor(private http: HttpClient) {}
 
   getAllTasks(): Observable<any> {
-    // console.log(this.http.get(this.apiURL));
     return this.http.get(`${this.apiURL}/allTasks`);
   }
 
   updateTaskStatus(taskId: number, status: boolean): Observable<any> {
     return this.http.put(`${this.apiURL}/${taskId}`, { status });
+  }
+
+  deleteTask(id: any) {
+    return this.http.delete(`${this.apiURL}/${id}`);
   }
 }

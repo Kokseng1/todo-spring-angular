@@ -13,6 +13,7 @@
         [(ngModel)]="task.status"
         (change)="toggleTaskStatus(task)"
       />
+      <button (click)="delete(task)">delete</button>
     </li>
   </ul>
 </div>

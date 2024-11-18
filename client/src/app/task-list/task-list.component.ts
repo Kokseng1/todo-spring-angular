@@ -30,8 +30,12 @@ export class TaskListComponent {
   }
 
   toggleTaskStatus(task: any): void {
-    console.log(task.status);
     this.taskService
       .updateTaskStatus(task.id, task.status)
+      .subscribe((data) => {});
+  }
+
+  delete(task: any): void {
+    this.taskService.deleteTask(task.id).subscribe((data) => {});
   }
 }

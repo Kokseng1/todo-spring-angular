@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -42,13 +44,13 @@ public class TaskController {
         return taskService.addTask(task);
     }
 
-    @DeleteMapping("delete")
-    public String deleteTask(@RequestBody Task task) {
-        return taskService.delete(task);
+    @DeleteMapping("{id}")
+    public ResponseEntity<Map<String, String>> deleteTask(@PathVariable int id) {
+        return taskService.delete(id);
     }
 
     @PutMapping("{taskID}")
-    public String editTask(@PathVariable int taskID, @RequestBody StatusUpdateDto status) {
+    public ResponseEntity<Map<String, String>> editTaskStatus(@PathVariable int taskID, @RequestBody StatusUpdateDto status) {
         return taskService.updateStatus(taskID, status);
     }
 }

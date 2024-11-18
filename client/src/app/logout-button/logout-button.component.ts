@@ -13,8 +13,8 @@ export class LogoutButtonComponent {
   constructor(private http: HttpClient, private router: Router) {}
 
   logout() {
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem('token', '');
+    if (typeof window !== 'undefined' && window.localStorage.getItem('token')) {
+      window.localStorage.removeItem('token');
     }
     this.router.navigate(['/login']);
   }
