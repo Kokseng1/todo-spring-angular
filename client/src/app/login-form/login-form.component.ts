@@ -25,6 +25,7 @@ export class LoginComponent {
 
     interface LoginResponse {
       token: string;
+      id: Number;
     }
 
     this.http
@@ -35,6 +36,10 @@ export class LoginComponent {
         next: (response) => {
           if (response.status === 200 && response.body?.token) {
             window.localStorage.setItem('token', response.body['token']);
+            window.localStorage.setItem(
+              'user_id',
+              response.body['id'].toString()
+            );
             this.router.navigate(['/tasks']);
           }
         },
