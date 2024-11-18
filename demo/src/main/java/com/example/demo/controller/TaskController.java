@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.Task;
+import com.example.demo.dto.StatusUpdateDto;
+import com.example.demo.entities.Task;
 import com.example.demo.service.TaskService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,7 +29,6 @@ public class TaskController {
     
     @GetMapping("allTasks")
     public List<Task> getAllTasks(){
-        // System.out.println("in contrller");
         return taskService.getAllTasks();
     }
 
@@ -42,12 +43,12 @@ public class TaskController {
     }
 
     @DeleteMapping("delete")
-    public String delteTask(@RequestBody Task task) {
+    public String deleteTask(@RequestBody Task task) {
         return taskService.delete(task);
     }
 
-    // @GetMapping("/csrf-token")
-    // public CsrfToken getCsrfToken(HttpServletRequest httpServletRequest) {
-    //     return (CsrfToken) httpServletRequest.getAttribute("_csrf");
-    // }
+    @PutMapping("{taskID}")
+    public String editTask(@PathVariable int taskID, @RequestBody StatusUpdateDto status) {
+        return taskService.updateStatus(taskID, status);
+    }
 }

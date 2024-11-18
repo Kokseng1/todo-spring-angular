@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.entities;
 
 import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;

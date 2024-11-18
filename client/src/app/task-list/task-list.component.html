@@ -1,16 +1,18 @@
-<div *ngIf="tasks.length === 0">
-  <p>No tasks available.</p>
-</div>
+<app-logout-button />
+<div *ngIf="isLoading">Loading tasks...</div>
+<div *ngIf="!isLoading">
+  <div *ngIf="tasks.length === 0">
+    <p>No tasks available.</p>
+  </div>
 
-<ul>
-  <!-- Loop through each task in the tasks array and display it -->
-  <li *ngFor="let task of tasks">
-    <p>{{ task.name }}</p>
-    <!-- Display the task name -->
-    <p>Status: {{ task.status ? "Completed" : "Pending" }}</p>
-    <!-- Show completion status -->
-    <!-- Optionally, you can add buttons to update or delete the task -->
-    <!-- <button (click)="updateTask(task)">Update</button>
-      <button (click)="deleteTask(task.id)">Delete</button> -->
-  </li>
-</ul>
+  <ul>
+    <li *ngFor="let task of tasks">
+      <p>{{ task.name }}</p>
+      <input
+        type="checkbox"
+        [(ngModel)]="task.status"
+        (change)="toggleTaskStatus(task)"
+      />
+    </li>
+  </ul>
+</div>

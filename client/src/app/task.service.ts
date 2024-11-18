@@ -6,29 +6,16 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root',
 })
 export class TaskService {
-  private apiURL = 'http://localhost:8080/task/allTasks';
+  private apiURL = 'http://localhost:8080/task';
 
   constructor(private http: HttpClient) {}
 
   getAllTasks(): Observable<any> {
     // console.log(this.http.get(this.apiURL));
-    return this.http.get(this.apiURL);
-    const hardcodedTasks = [
-      {
-        id: 1,
-        name: 'Task 1',
-        description: 'This is a hardcoded task description',
-        completed: false,
-      },
-      {
-        id: 2,
-        name: 'Task 2',
-        description: 'Another hardcoded task description',
-        completed: true,
-      },
-    ];
+    return this.http.get(`${this.apiURL}/allTasks`);
+  }
 
-    // Return the hardcoded tasks wrapped in an Observable using 'of'
-    // return of(hardcodedTasks);
+  updateTaskStatus(taskId: number, status: boolean): Observable<any> {
+    return this.http.put(`${this.apiURL}/${taskId}`, { status });
   }
 }

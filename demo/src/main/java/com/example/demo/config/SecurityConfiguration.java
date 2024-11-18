@@ -20,26 +20,6 @@ import jakarta.servlet.http.HttpServletResponse;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
-//    @Bean
-//     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//         http
-//             // .csrf(csrf -> csrf
-//             //     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()) // Store CSRF token in a cookie
-//             // )
-//             // .csrf((csrf) -> csrf
-//             //     .ignoringRequestMatchers("*"))
-//             .csrf(AbstractHttpConfigurer::disable)
-//             .authorizeHttpRequests(authz -> authz
-//                 .requestMatchers(HttpMethod.POST, "/login").permitAll()
-//                 .anyRequest().authenticated() // Require authentication for all requests
-//             )
-//             .exceptionHandling(exception ->exception
-//             .authenticationEntryPoint((request, response, authException) -> {
-//                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//             }));
-        
-//         return http.build(); 
-//     }
     private final UserAuthenticationEntryPoint userAuthenticationEntryPoint;
     private final UserAuthenticationProvider userAuthenticationProvider;
 
