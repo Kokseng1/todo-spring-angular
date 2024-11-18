@@ -22,31 +22,20 @@ export class LoginComponent {
       login: this.username,
       password: this.password,
     };
-    // const csrfToken = this.getCsrfTokenFromCookie('XSRF-TOKEN'); // or the cookie name your backend uses
-    // if (csrfToken) {
-    //   console.log('csrf token ', csrfToken);
-    //   req = req.clone({
-    //     setHeaders: {
-    //       'X-XSRF-TOKEN': csrfToken,
-    //     },
-    //   });
-    // }
 
-    const csrfToken = document.cookie.replace(
-      /(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/,
-      '$1'
-    );
-    console.log(csrfToken);
+    interface LoginResponse {
+      token: string;
+    }
 
     this.http
-      .post('http://localhost:8080/login', loginPayload, {
+      .post<LoginResponse>('http://localhost:8080/login', loginPayload, {
         observe: 'response',
       })
       .subscribe({
         next: (response) => {
-          if (response.status === 200) {
-            console.log('Login successful');
-            this.router.navigate(['/dashboard']);
+          if (response.status === 200 && response.body?.token) {
+            window.localStorage.setItem('token', response.body['token']);
+            this.router.navigate(['/tasks']);
           }
         },
         error: (error) => {
