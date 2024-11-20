@@ -1,46 +1,64 @@
-<div>
+<div class="container">
   <h2>Register</h2>
   <form (ngSubmit)="login()">
-    <div>
-      <label for="firstname">firstname:</label>
-      <input
-        type="text"
-        id="firstname"
-        [(ngModel)]="firstname"
-        name="firstname"
-        required
-      />
-    </div>
-    <div>
-      <label for="lastname">lastname:</label>
-      <input
-        type="text"
-        id="lastname"
-        [(ngModel)]="lastname"
-        name="lastname"
-        required
-      />
-    </div>
-    <div>
-      <label for="username">Username:</label>
-      <input
-        type="text"
-        id="username"
-        [(ngModel)]="username"
-        name="username"
-        required
-      />
-    </div>
-    <div>
-      <label for="password">Password:</label>
-      <input
-        type="password"
-        id="password"
-        [(ngModel)]="password"
-        name="password"
-        required
-      />
-    </div>
+    <table>
+      <tr>
+        <td>
+          <label for="firstname">firstname:</label>
+        </td>
+        <td>
+          <input
+            type="text"
+            id="firstname"
+            [(ngModel)]="firstname"
+            name="firstname"
+            required
+          />
+        </td>
+      </tr>
+      <tr class="inputfield">
+        <td>
+          <label for="lastname">lastname:</label>
+        </td>
+        <td>
+          <input
+            type="text"
+            id="lastname"
+            [(ngModel)]="lastname"
+            name="lastname"
+            required
+          />
+        </td>
+      </tr>
+      <tr class="inputfield">
+        <td>
+          <label for="username">Username:</label>
+        </td>
+        <td>
+          <input
+            type="text"
+            id="username"
+            [(ngModel)]="username"
+            name="username"
+            required
+          />
+        </td>
+      </tr>
+      <tr class="inputfield">
+        <td>
+          <label for="password">Password:</label>
+        </td>
+        <td>
+          <input
+            type="password"
+            id="password"
+            [(ngModel)]="password"
+            name="password"
+            required
+          />
+        </td>
+      </tr>
+    </table>
     <button type="register">Register</button>
   </form>
 </div>

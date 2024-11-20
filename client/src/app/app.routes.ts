@@ -8,4 +8,5 @@ export const routes: Routes = [
   { path: 'tasks', component: TaskListComponent },
   { path: 'register', component: RegisterFormComponent },
   { path: 'logout', component: LoginComponent },
+  { path: '', component: TaskListComponent },
 ];
