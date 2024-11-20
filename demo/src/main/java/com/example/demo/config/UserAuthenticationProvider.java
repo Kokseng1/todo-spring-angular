@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.util.Base64;
@@ -48,6 +49,7 @@ public class UserAuthenticationProvider {
                 .withExpiresAt(validity)
                 .withClaim("firstName", user.getFirstName())
                 .withClaim("lastName", user.getLastName())
+                .withClaim("user_id", user.getId())
                 .sign(algorithm);
     }
 
@@ -63,6 +65,7 @@ public class UserAuthenticationProvider {
         user.setLogin(decoded.getSubject());
         user.setFirstName(decoded.getClaim("firstName").asString());
         user.setLastName(decoded.getClaim("lastName").asString());
+        user.setId(decoded.getClaim("user_id").asLong());
 
         return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
     }
@@ -78,6 +81,10 @@ public class UserAuthenticationProvider {
         UserDto user = userService.findByLogin(decoded.getSubject());
 
         return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
+    }
+
+    public static UserDto getCurrentUserDto() {
+        return (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
 }

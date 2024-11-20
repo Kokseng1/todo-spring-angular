@@ -1,5 +1,8 @@
 package com.example.demo.entities;
 
+import com.example.demo.dto.UserDto;
+import com.example.demo.mappers.UserMapper;
+
 import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -30,6 +33,10 @@ public class Task {
     // Setter for 'id'
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     // Getter for 'name'
